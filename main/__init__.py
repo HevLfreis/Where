@@ -6,19 +6,19 @@
 from flask import Flask, request
 from flask.ext.cache import Cache
 
-from config import CACHE_BACKEND
+from config import CACHE_BACKEND, DEPLOYMENT
 
 app = Flask(__name__)
 
-cache = Cache(app, config={'CACHE_TYPE': CACHE_BACKEND})
-
-# Todo: add redis cache
-# cache = Cache(app, config={
-#     'CACHE_TYPE': 'redis',
-#     'CACHE_KEY_PREFIX': 'where',
-#     'CACHE_REDIS_HOST': 'localhost',
-#     'CACHE_REDIS_PORT': '6379',
-#     'CACHE_REDIS_URL': 'redis://localhost:6379'
-#     })
+if not DEPLOYMENT:
+    cache = Cache(app, config={'CACHE_TYPE': CACHE_BACKEND})
+else:
+    cache = Cache(app, config={
+        'CACHE_TYPE': 'redis',
+        'CACHE_KEY_PREFIX': 'where',
+        'CACHE_REDIS_HOST': 'localhost',
+        'CACHE_REDIS_PORT': '6379',
+        'CACHE_REDIS_URL': 'redis://localhost:6379/2'
+        })
 
 from routes import *

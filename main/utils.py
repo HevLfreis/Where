@@ -56,7 +56,6 @@ def coordinate_check(lng, lat):
 
 def find_nearest(lng, lat, topk=2):
 
-    # Todo: waiting partition
     loc_list = read_coordinates(lng, lat)
 
     loc_list = sorted(loc_list, key=lambda x: abs(x[0]-lng)+abs(x[1]-lat))

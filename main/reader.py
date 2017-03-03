@@ -4,6 +4,7 @@
 # Date: 2017/3/2
 # Time: 16:47
 from config import *
+from main import decorator
 
 
 def read_coordinates(lng, lat, all_mode=False):
@@ -23,10 +24,18 @@ def read_coordinates(lng, lat, all_mode=False):
     return loc_list
 
 
+@decorator.get_or_set('location')
 def read_coordinates_from_file(part):
     with open(os.path.join(DATA_DIR, part)) as f:
         return [map(int, line.strip().split(',')) for line in f]
 
 
 def read_coordinates_from_all_files():
-    return []
+    loc_list = []
+
+    for part in os.listdir(DATA_DIR):
+        print 'part reading: ', part
+        with open(os.path.join(DATA_DIR, part)) as f:
+            loc_list += [map(int, line.strip().split(',')) for line in f]
+
+    return loc_list

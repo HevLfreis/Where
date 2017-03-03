@@ -7,7 +7,9 @@ from locust import HttpLocust, TaskSet
 
 
 def get_nearest(l):
-    l.client.post("/login/", {"a": "b"})
+    for i in xrange(-400, 400, 10):
+        l.client.get("/?lng="+str(i)+"lat="+str(i))
+        l.client.post("/", {"lng": i, "lat": i})
 
 
 class UserBehavior(TaskSet):

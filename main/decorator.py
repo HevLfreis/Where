@@ -13,14 +13,14 @@ def get_or_set(kw, timeout=None):
             key = kw + '-' + arg
             data = cache.get(key)
             if not data:
-                # print key, 'notin'
+                print key, 'notin'
                 data = func(*args, **kwargs)
                 if timeout:
                     cache.set(key, data, timeout)
                 else:
                     cache.set(key, data)
-            # else:
-            #     print key, 'bingo'
+            else:
+                print key, 'bingo'
             return data
         return wrapper
     return decorator
