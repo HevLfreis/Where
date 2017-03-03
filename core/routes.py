@@ -20,11 +20,11 @@ def nearby_location():
 
         if coordinate_check(lng, lat):
             nr = find_nearest(lng, lat)
-            query_logging(request, [lng, lat], nr)
+            # query_logging(request, [lng, lat], nr)
             return jsonify(nr)
 
         else:
-            query_logging(request, [lng, lat])
+            # query_logging(request, [lng, lat])
             return jsonify(BAD_CODE_JSON)
 
     elif request.method == 'POST':
@@ -33,11 +33,11 @@ def nearby_location():
 
         if coordinate_check(lng, lat):
             nr = find_nearest(lng, lat)
-            query_logging(request, [lng, lat], nr)
+            # query_logging(request, [lng, lat], nr)
             return jsonify(nr)
 
         else:
-            query_logging(request, [lng, lat])
+            # query_logging(request, [lng, lat])
             return jsonify(BAD_CODE_JSON)
 
     else:

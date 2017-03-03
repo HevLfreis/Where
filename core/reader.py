@@ -22,6 +22,12 @@ def read_coordinates(lng, lat, all_mode=False):
     pa = int((lng - AXIS_X_MIN) / scale)
     pb = int((AXIS_Y_MAX - lat) / scale)
 
+    # fix edge error
+    if lng == AXIS_X_MAX:
+        pa -= 1
+    if lat == AXIS_Y_MIN:
+        pb -= 1
+
     # print MAP_PARTITION_MATRIX[int(pa)][int(pb)]
 
     loc_list = read_coordinates_from_file(MAP_PARTITION_MATRIX[int(pa)][int(pb)])

@@ -11,8 +11,8 @@ from core.reader import read_coordinates
 
 def check_static_location_files():
     """
-     check the validation of static location files, if the files are missing
-     according to the partition settings, create that file.
+    check the validation of static location files, if the files are missing
+    according to the partition settings, create that file
     """
     files = set([f for f in os.listdir(DATA_DIR)])
     checked = set([LOCATION_FILE_NAME+str(i) for i in xrange(X_PARTITION*Y_PARTITION)])

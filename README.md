@@ -17,7 +17,7 @@ Send post request to  `http://where.seeleit.com/`. In post method, your data in 
 
 
 ## Return value
-The service will return the top2 nearest positions correponding to your request in json format:
+The service will return the top2 nearest positions correponding to your request in json format:  
 for example
 `{
   "locations": [
@@ -50,11 +50,12 @@ I provide a locust file (locustfile.py) to test the service. See [LOCUST](http:/
 2. We calculate the distance based on the line distance of the grid instead of Euclidean Distance. For exmaple, the distance between [1,1] and [0,0] is 2, not sqrt(2).
 3. Locations are static and stored in several files as is shown below.
 	```
-	100,100
-	-60,80
-	70,-250
+	100,100  
+	-60,80  
+	70,-250  
 	...
-	```
+	```  
+	
 	In order to optimize the efficiency, I try to partition the whole map to small areas of same size. Each area with a specific file. It is critical that putting locations within appropriate file for other services which will modify these static files.
 	
 
