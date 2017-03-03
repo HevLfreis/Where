@@ -6,12 +6,8 @@
 import os
 import random
 
-from config import DATA_DIR, AXIS_X_MIN, AXIS_X_MAX, AXIS_Y_MAX, AXIS_Y_MIN
+from config import *
 
-
-# def is_nearest(lng, lat, loc_list):
-#
-#     for a, b
 
 def write_random_locations(filename, length):
     with open(os.path.join(DATA_DIR, filename), 'w+') as f:
@@ -21,3 +17,4 @@ def write_random_locations(filename, length):
 
 if __name__ == '__main__':
     write_random_locations('loc_part1', 100)
+    # print MAP_PARTITION_MATRIX[-400][]

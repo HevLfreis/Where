@@ -30,6 +30,7 @@ def parse_loc(request, request_type='GET'):
             lat = int(request.args.get('lat'))
 
     except Exception, e:
+        print e
         return [None, None]
 
     else:
@@ -37,7 +38,7 @@ def parse_loc(request, request_type='GET'):
 
 
 def coordinate_check(lng, lat):
-    if not lng or not lat:
+    if lng is None or lat is None:
         return False
 
     elif type(lng) is not int or type(lat) is not int:

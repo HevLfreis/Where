@@ -12,6 +12,7 @@ app = Flask(__name__)
 
 cache = Cache(app, config={'CACHE_TYPE': CACHE_BACKEND})
 
+# Todo: add redis cache
 # cache = Cache(app, config={
 #     'CACHE_TYPE': 'redis',
 #     'CACHE_KEY_PREFIX': 'where',

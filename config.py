@@ -17,9 +17,17 @@ AXIS_Y_MIN = -AXIS_Y_MAX
 
 X_PARTITION = Y_PARTITION = 2
 
-MAP_PARTITION_DICT = {}
-
 BAD_CODE_JSON = {'locations': [None, None]}
 
 LOCATION_FILE_NAME = 'loc_part'
+
+MAP_PARTITION_MATRIX = []
+k = 0
+for i in xrange(X_PARTITION):
+    a = []
+    for j in xrange(Y_PARTITION):
+        a.append(LOCATION_FILE_NAME+str(k))
+        k += 1
+    MAP_PARTITION_MATRIX.append(a)
+
 
