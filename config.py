@@ -15,8 +15,6 @@ else:
     DEPLOYMENT = False
 DEBUG = not DEPLOYMENT
 
-CACHE_BACKEND = 'simple'
-
 AXIS_X_MAX = 500
 AXIS_Y_MAX = 500
 AXIS_X_MIN = -AXIS_X_MAX

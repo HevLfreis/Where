@@ -7,8 +7,9 @@
 from flask import request, abort, jsonify
 
 from config import BAD_CODE_JSON
-from main import app
-from main.utils import coordinate_check, parse_loc, find_nearest
+from core import app
+from core.logging import query_logging
+from core.utils import coordinate_check, parse_loc, find_nearest
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -18,9 +19,12 @@ def nearby_location():
         lng, lat = parse_loc(request, 'GET')
 
         if coordinate_check(lng, lat):
-            return jsonify(find_nearest(lng, lat))
+            nr = find_nearest(lng, lat)
+            query_logging(request, [lng, lat], nr)
+            return jsonify(nr)
 
         else:
+            query_logging(request, [lng, lat])
             return jsonify(BAD_CODE_JSON)
 
     elif request.method == 'POST':
@@ -28,9 +32,12 @@ def nearby_location():
         lng, lat = parse_loc(request, 'POST')
 
         if coordinate_check(lng, lat):
-            return jsonify(find_nearest(lng, lat))
+            nr = find_nearest(lng, lat)
+            query_logging(request, [lng, lat], nr)
+            return jsonify(nr)
 
         else:
+            query_logging(request, [lng, lat])
             return jsonify(BAD_CODE_JSON)
 
     else:

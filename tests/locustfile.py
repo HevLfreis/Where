@@ -7,8 +7,8 @@ from locust import HttpLocust, TaskSet
 
 
 def get_nearest(l):
-    for i in xrange(-400, 400, 10):
-        l.client.get("/?lng="+str(i)+"lat="+str(i))
+    for i in xrange(-600, 600, 10):
+        l.client.get("/?lng="+str(i)+"&lat="+str(i))
         l.client.post("/", {"lng": i, "lat": i})
 
 

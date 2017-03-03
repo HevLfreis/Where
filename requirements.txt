@@ -1,1 +1,4 @@
-flask
+Flask==0.10.1
+Flask-Cache==0.13.1
+redis==2.10.5
+pymongo==3.4.0

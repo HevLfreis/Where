@@ -6,10 +6,14 @@
 import os
 
 from config import *
-from main.reader import read_coordinates
+from core.reader import read_coordinates
 
 
 def check_static_location_files():
+    """
+     check the validation of static location files, if the files are missing
+     according to the partition settings, create that file.
+    """
     files = set([f for f in os.listdir(DATA_DIR)])
     checked = set([LOCATION_FILE_NAME+str(i) for i in xrange(X_PARTITION*Y_PARTITION)])
 
@@ -20,6 +24,12 @@ def check_static_location_files():
 
 
 def parse_loc(request, request_type='GET'):
+    """
+    parse location from http request
+    :param request: flask http request
+    :param request_type: 'GET' or 'POST'
+    :return: parsed lng and lat to [int, int] format. if wrong, return [None, None]
+    """
 
     try:
         if request_type == 'POST':
@@ -30,7 +40,7 @@ def parse_loc(request, request_type='GET'):
             lat = int(request.args.get('lat'))
 
     except Exception, e:
-        print e
+        # print e
         return [None, None]
 
     else:
@@ -38,6 +48,12 @@ def parse_loc(request, request_type='GET'):
 
 
 def coordinate_check(lng, lat):
+    """
+    check lng and lat
+    :param lng: longitude
+    :param lat: latitude
+    :return: if the two params are both valid
+    """
     if lng is None or lat is None:
         return False
 
@@ -55,6 +71,13 @@ def coordinate_check(lng, lat):
 
 
 def find_nearest(lng, lat, topk=2):
+    """
+    sort all coordinates in memory and return the nearest k locations
+    :param lng: longitude
+    :param lat: latitude
+    :param topk: top k
+    :return: top k nearest locations in a dict with lists
+    """
 
     loc_list = read_coordinates(lng, lat)
 
@@ -63,5 +86,19 @@ def find_nearest(lng, lat, topk=2):
     return {'locations': loc_list[0:topk]}
 
 
-if __name__ == '__main__':
-    print coordinate_check(123, 444)
+def get_ipaddr(req):
+    """
+    :param req: flask request
+    :return: host ip of the request
+    """
+    if req.headers.getlist("X-Forwarded-For"):
+        ip = req.headers.getlist("X-Forwarded-For")[0]
+
+    else:
+        ip = req.remote_addr
+
+    return ip
+
+
+# if __name__ == '__main__':
+#     print coordinate_check(123, 444)

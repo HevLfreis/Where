@@ -6,12 +6,12 @@
 from flask import Flask, request
 from flask.ext.cache import Cache
 
-from config import CACHE_BACKEND, DEPLOYMENT
+from config import DEPLOYMENT
 
 app = Flask(__name__)
 
 if not DEPLOYMENT:
-    cache = Cache(app, config={'CACHE_TYPE': CACHE_BACKEND})
+    cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 else:
     cache = Cache(app, config={
         'CACHE_TYPE': 'redis',
