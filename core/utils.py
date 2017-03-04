@@ -54,6 +54,7 @@ def coordinate_check(lng, lat):
     :param lat: latitude
     :return: if the two params are both valid
     """
+
     if lng is None or lat is None:
         return False
 
@@ -63,7 +64,7 @@ def coordinate_check(lng, lat):
     elif lng > AXIS_X_MAX or lng < AXIS_X_MIN:
         return False
 
-    elif lat > AXIS_Y_MAX or lng < AXIS_Y_MIN:
+    elif lat > AXIS_Y_MAX or lat < AXIS_Y_MIN:
         return False
 
     else:
